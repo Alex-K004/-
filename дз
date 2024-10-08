@@ -5,11 +5,20 @@ class Mentor:
         self.courses_attached = []
         
 class Lecturer(Mentor):
+    def __init__(self, name, surname, grades):
+        self.name = name
+        self.surname = surname
+        self.grades = grades
+        self.grades = {}
+
+    def __eq__(self, lecturer):
+        return (self.grades == lecturer.grades)
+    
     def __str__(self):
         return f"Имя: {self.name} /n Фамилия: {self.surname} /n Средняя оценка за лекции: {self.grades}"
-    grades = {}
+    
         
-        
+
 
 class Reviewer(Mentor):
      def rate_hw(self, student, course, grade):
@@ -22,10 +31,10 @@ class Reviewer(Mentor):
             return 'Ошибка'
         
         def __str__(self):
-            return f"Имя: {self.name} /n Фамилия: {self.surname}"
+             return f"Имя: {self.name} /n Фамилия: {self.surname}"
 
 class Student:
-    def __init__(self, name, surname, gender):
+    def __init__(self, name, surname, gender, grades):
         self.name = name
         self.surname = surname
         self.gender = gender
@@ -38,6 +47,9 @@ class Student:
 
             def __str__(self):
                 return f"Имя: {self.name} /n Фамилия: {self.surname} /n Средняя оценка за домашние задания: {self.grades} /n Курсы в процессе изучения: {self.courses_in_progress} /n Завершенные курсы: Введение в программирование" 
+            
+    def __eq__(self, student):
+        return (self.grades == student.grades)
 
     def rate_Lecturer(self, lecturer, course, grade):
         if isinstance(lecturer, Lecturer) and course in self.courses_in_progress and course in lecturer.courses_attached:
